@@ -41,7 +41,7 @@ public class Event {
      */
     public boolean isInDay(LocalDate aDay) {
        if(aDay.isBefore(myStart.toLocalDate()) || aDay.isAfter(myStart.toLocalDate().plusDays(myDuration.toDays()))){
-           return false;}
+       return false;}
         else{
             return true;
                    }
@@ -67,6 +67,11 @@ public class Event {
      */
     public Duration getDuration() {
         return myDuration;
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" + "myTitle=" + myTitle + ", myStart=" + myStart + ", myDuration=" + myDuration + '}';
     }
    
 }
