@@ -40,10 +40,13 @@ public class Event {
      * @return true if the event occurs on that day, false otherwise
      */
     public boolean isInDay(LocalDate aDay) {
-        // TODO : implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
-    }
-   
+       if(aDay.isBefore(myStart.toLocalDate()) || aDay.isAfter(myStart.toLocalDate().plus(myDuration))){
+           return false;}
+        else{
+            return true;
+                   }
+       }
+    
     /**
      * @return the myTitle
      */
@@ -65,7 +68,5 @@ public class Event {
     public Duration getDuration() {
         return myDuration;
     }
-
    
-    
 }
