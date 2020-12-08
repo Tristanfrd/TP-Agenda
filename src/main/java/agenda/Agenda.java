@@ -26,7 +26,7 @@ public class Agenda {
     public List<Event> eventsInDay(LocalDate day) {
         ArrayList<Event> evenementsDuJour = new ArrayList<>();
         for(Event e:evenements){
-            if (day.isAfter(e.getStart().toLocalDate().minusDays(1)) && day.isBefore(e.getStart().toLocalDate().plus(e.getDuration()).plusDays(1))){
+            if (day.isAfter(e.getStart().toLocalDate().minusDays(1)) && day.isBefore(e.getStart().toLocalDate().plusDays(e.getDuration().toDays()).plusDays(1))){
                 evenementsDuJour.add(e);
             }
         }
