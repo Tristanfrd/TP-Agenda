@@ -21,10 +21,11 @@ public class RepetitiveEvent extends Event {
      * <LI>ChronoUnit.MONTHS for monthly repetitions</LI>
      * </UL>
      */
+    private ChronoUnit frequency;
+    
     public RepetitiveEvent(String title, LocalDateTime start, Duration duration, ChronoUnit frequency) {
         super(title, start, duration);
-        // TODO : implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+        this.frequency = frequency;
     }
 
     /**
@@ -33,8 +34,11 @@ public class RepetitiveEvent extends Event {
      * @param date the event will not occur at this date
      */
     public void addException(LocalDate date) {
-        // TODO : implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+        long j = ChronoUnit.DAYS.between(this.getStart().toLocalDate(), this.getStart().toLocalDate().plus(this.getDuration()));
+        for(long i=0;i<j;i++){
+            if (this.getStart().plusDays(i).toLocalDate() == date)
+                throw new IllegalArgumentException("La date ne convient pas à un événement.");
+        }
     }
 
     /**
@@ -42,8 +46,7 @@ public class RepetitiveEvent extends Event {
      * @return the type of repetition
      */
     public ChronoUnit getFrequency() {
-        // TODO : implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");    
+        return frequency;    
     }
 
 }
