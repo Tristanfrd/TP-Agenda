@@ -34,7 +34,7 @@ public class RepetitiveEvent extends Event {
      * @param date the event will not occur at this date
      */
     public void addException(LocalDate date) {
-        long j = ChronoUnit.DAYS.between(this.getStart().toLocalDate(), this.getStart().toLocalDate().plus(this.getDuration()));
+        long j = ChronoUnit.DAYS.between(this.getStart().toLocalDate(), this.getStart().toLocalDate().plusDays(this.getDuration().toDays()));
         for(long i=0;i<j;i++){
             if (this.getStart().plusDays(i).toLocalDate() == date)
                 throw new IllegalArgumentException("La date ne convient pas à un événement.");
