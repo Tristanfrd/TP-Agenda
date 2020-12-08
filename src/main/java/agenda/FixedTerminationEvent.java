@@ -4,6 +4,9 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import static java.time.temporal.ChronoUnit.DAYS;
+import static java.time.temporal.ChronoUnit.MONTHS;
+import static java.time.temporal.ChronoUnit.WEEKS;
 
 /**
  * Description : A repetitive event that terminates after a given date, or after
@@ -11,9 +14,10 @@ import java.time.temporal.ChronoUnit;
  */
 public class FixedTerminationEvent extends RepetitiveEvent {
     
-    private  LocalDate tic ;
-    private long noc ;
-    
+    private  LocalDate tic =null ;
+    private long noc = 0;
+    private LocalDate fin ;
+    private long nb;
     /**
      * Constructs a fixed terminationInclusive event ending at a given date
      *
@@ -58,11 +62,37 @@ public class FixedTerminationEvent extends RepetitiveEvent {
      * @return the termination date of this repetitive event
      */
     public LocalDate getTerminationDate() {
-        return  tic ;
+        if (tic == null){
+            if (this.getFrequency()== ChronoUnit.DAYS){
+                fin = this.getStart().toLocalDate().plusDays(noc-1);
+            }
+            if (this.getFrequency()== ChronoUnit.WEEKS){
+                fin = this.getStart().toLocalDate().plusWeeks(noc-1);
+            }
+            if (this.getFrequency()== ChronoUnit.MONTHS){
+                fin = this.getStart().toLocalDate().plusMonths(noc-1);
+            }
+        }
+        else{
+            fin =  tic ;}
+        return fin;
     }
 
     public long getNumberOfOccurrences() {
-        return noc ;
+       if (noc == 0){
+            if (this.getFrequency()== ChronoUnit.DAYS){
+                nb = DAYS.between(this.getStart().toLocalDate(),tic)+1;
+            }
+            if (this.getFrequency()== ChronoUnit.WEEKS){
+                nb = WEEKS.between(this.getStart().toLocalDate(),tic)+1;
+            }
+            if (this.getFrequency()== ChronoUnit.MONTHS){
+                nb = MONTHS.between(this.getStart().toLocalDate(),tic)+1;
+            }
+        }
+        else{
+            nb =  noc ;}
+        return nb;
     }
         
 }
