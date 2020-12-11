@@ -35,28 +35,7 @@ public class RepetitiveEvent extends Event {
      * @param date the event will not occur at this date
      */
     public void addException(LocalDate date) {
-        exceptions.add(date);
-        /*if (this.frequency == ChronoUnit.DAYS){
-        long j = ChronoUnit.DAYS.between(this.getStart().toLocalDate(), this.getStart().toLocalDate().plusDays(this.getDuration().toDays()));
-        for(long i=0;i<j;i++){
-            if (this.getStart().plusDays(i).toLocalDate() == date){
-                throw new IllegalArgumentException("La date ne convient pas à un événement.");
-            }}
-    }
-        else if (this.frequency == ChronoUnit.WEEKS){
-        long j = ChronoUnit.WEEKS.between(this.getStart().toLocalDate(), this.getStart().toLocalDate().plusWeeks(this.getDuration().toDays()));
-        for(long i=0;i<j;i++){
-            if (this.getStart().plusWeeks(i).toLocalDate() == date){
-                throw new IllegalArgumentException("La date ne convient pas à un événement.");
-        }}
-    }   else if (this.frequency == ChronoUnit.MONTHS){
-        long j = ChronoUnit.MONTHS.between(this.getStart().toLocalDate(), this.getStart().toLocalDate().plusMonths(this.getDuration().toDays()));
-        for(long i=0;i<j;i++){
-            if (this.getStart().plusMonths(i).toLocalDate() == date){
-                throw new IllegalArgumentException("La date ne convient pas à un événement.");
-        }}
-    }*/
-        
+        exceptions.add(date);        
     }
     
     public boolean isInDay(LocalDate aDay){
