@@ -39,13 +39,18 @@ public class Event {
      * @param aDay the day to test
      * @return true if the event occurs on that day, false otherwise
      */
-    public boolean isInDay(LocalDate aDay) {
-       if(aDay.isBefore(myStart.toLocalDate()) || aDay.isAfter(myStart.toLocalDate().plusDays(myDuration.toDays()))){
-       return false;}
-        else{
-            return true;
-                   }
-       }
+    public boolean isInDay(LocalDate aDay){
+        
+        boolean inDay = false ;
+        LocalDateTime myFinish = myStart.plus(myDuration);
+        if (aDay.isEqual(myStart.toLocalDate()) || aDay.isEqual(myFinish.toLocalDate())){ //
+            inDay = true;
+        }
+        else if (aDay.isAfter(myStart.toLocalDate()) && aDay.isBefore(myFinish.toLocalDate())){
+            inDay = true ;
+        }
+        return inDay ;
+        }
     
     /**
      * @return the myTitle
