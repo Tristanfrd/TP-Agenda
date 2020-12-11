@@ -20,14 +20,18 @@ public class AgendaTest {
 
     // November 1st, 2020, 22:30
     LocalDateTime nov_1__2020_22_30 = LocalDateTime.of(2020, 11, 1, 22, 30);
+    LocalDateTime nov_1__2020_23_30 = LocalDateTime.of(2020, 11, 1, 23, 30);
+    LocalDateTime nov_1__2020_20_00 = LocalDateTime.of(2020, 11, 1, 20, 00);
 
     // 120 minutes
     Duration min_120 = Duration.ofMinutes(120);
+    Duration min_30 = Duration.ofMinutes(30);
 
     // A simple event
     // November 1st, 2020, 22:30, 120 minutes
     Event simple = new Event("Simple event", nov_1__2020_22_30, min_120);
-
+    Event bloque = new Event("Event sympa mais un peu génant",nov_1__2020_23_30,min_30); 
+    Event passe = new Event("Event d'echauffement",nov_1__2020_20_00,min_30);
     // A Weekly Repetitive event ending at a given date
     RepetitiveEvent fixedTermination = new FixedTerminationEvent("Fixed termination weekly", nov_1__2020_22_30, min_120, ChronoUnit.WEEKS, jan_5_2021);
 
@@ -53,5 +57,15 @@ public class AgendaTest {
         assertTrue(agenda.eventsInDay(nov_1_2020).contains(neverEnding));
     }
 
-
+    @Test
+    public void testFindByTitle(){
+        assertTrue(agenda.findByTitle("Simple event").contains(simple),"Le programme devrait retourner vrai car simple event appartient à simple.");
+        assertFalse(agenda.findByTitle("event banal").contains(simple),"On ne connaît pas event banal");
+    }
+    
+    @Test 
+    public void testisFreeFor(){
+        assertFalse(agenda.isFreeFor(bloque),"Le planning devrait être déjà bloqué pour simple.");
+        assertTrue(agenda.isFreeFor(passe),"Le planning devrait accepter passe.");
+}
 }
